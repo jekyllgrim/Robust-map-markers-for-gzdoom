@@ -1,9 +1,9 @@
-AddOptionMenu "OptionsMenu" before "CustomizeControls" 
+AddOptionMenu "OptionsMenu"
 {
 	Submenu "Robust map markers settings", "SMM_Settings"
 }
 
-AddOptionMenu "OptionsMenuSimple" before "CustomizeControls" 
+AddOptionMenu "OptionsMenuSimple"
 {
 	Submenu "Robust map markers settings", "SMM_Settings"
 	StaticText ""
