@@ -1,24 +1,25 @@
 AddOptionMenu "OptionsMenu"
 {
-	Submenu "Robust map markers settings", "SMM_Settings"
+	Submenu "Robust map markers settings", "rmm_Settings"
 }
 
 AddOptionMenu "OptionsMenuSimple"
 {
-	Submenu "Robust map markers settings", "SMM_Settings"
+	Submenu "Robust map markers settings", "rmm_Settings"
 	StaticText ""
 }
 
-OptionMenu "SMM_Settings"
+OptionMenu "rmm_Settings"
 {
 	Title "Robust map markers Settings"
 
-	Option "Monster markers", "smm_showmonsters", "OnOff"
-	Option "Key markers", "smm_showkeys", "OnOff"
-	Option "Weapon markers", "smm_showweapons", "OnOff"
-	Option "Ammo markers", "smm_showammo", "OnOff"
-	Option "Powerup markers", "smm_showartifacts", "OnOff"
-	Option "Other item markers", "smm_showotheritems", "OnOff"
-	Option "Show items dropped by enemies", "smm_showdropped", "OnOff"
-	Slider "Marker scale", "smm_markerscale", 0.05, 5.0, 0.05, 2
+	Option "Monster markers", "rmm_showmonsters", "OnOff"
+	Option "Key markers", "rmm_showkeys", "OnOff"
+	Option "Weapon markers", "rmm_showweapons", "OnOff"
+	Option "Ammo markers", "rmm_showammo", "OnOff"
+	Option "Health markers", "rmm_showhealth", "OnOff"
+	Option "Powerup markers", "rmm_showartifacts", "OnOff"
+	Option "Other item markers", "rmm_showotheritems", "OnOff"
+	Option "Show items dropped by enemies", "rmm_showdropped", "OnOff"
+	Slider "Marker scale", "rmm_markerscale", 0.05, 5.0, 0.05, 2
 }

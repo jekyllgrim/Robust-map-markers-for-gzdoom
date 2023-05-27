@@ -1,8 +1,9 @@
-user bool smm_showmonsters = false;
-user bool smm_showkeys = true;
-user bool smm_showweapons = true;
-user bool smm_showammo = false;
-user bool smm_showartifacts = true;
-user bool smm_showotheritems = true;
-user bool smm_showdropped = false;
-user float smm_markerscale = 0.25;
+user bool rmm_showmonsters = false;
+user bool rmm_showkeys = true;
+user bool rmm_showweapons = true;
+user bool rmm_showammo = false;
+user bool rmm_showhealth = false;
+user bool rmm_showartifacts = true;
+user bool rmm_showotheritems = true;
+user bool rmm_showdropped = false;
+user float rmm_markerscale = 0.25;

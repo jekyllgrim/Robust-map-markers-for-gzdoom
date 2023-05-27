@@ -14,13 +14,13 @@ class JGP_SafeMapMarkerHandler : EventHandler
             Inventory item = Inventory(e.thing);
 
             if (!showdropped)
-                showdropped = CVar.GetCVar('smm_showdropped', players[consoleplayer]);
+                showdropped = CVar.GetCVar('rmm_showdropped', players[consoleplayer]);
 
             if (e.thing.bISMONSTER)
             {
                 valid = true;
-                visCvarName = 'smm_showmonsters';
-                thingtype = JGP_SafeMapMarker.SMM_MONSTER;
+                visCvarName = 'rmm_showmonsters';
+                thingtype = JGP_SafeMapMarker.rmm_MONSTER;
             }
 
             if (item && (!item.bTOSSED || showdropped.GetBool()))
@@ -28,36 +28,43 @@ class JGP_SafeMapMarkerHandler : EventHandler
                 if (item is 'Key')
                 {
                     valid = true;
-                    visCvarName = 'smm_showkeys';
-                    thingtype = JGP_SafeMapMarker.SMM_KEY;
+                    visCvarName = 'rmm_showkeys';
+                    thingtype = JGP_SafeMapMarker.rmm_KEY;
                 }
 
                 else if (item is 'Weapon')
                 {
                     valid = true;
-                    visCvarName = 'smm_showweapons';
-                    thingtype = JGP_SafeMapMarker.SMM_WEAPON;
+                    visCvarName = 'rmm_showweapons';
+                    thingtype = JGP_SafeMapMarker.rmm_WEAPON;
                 }
 
                 else if (item is 'Ammo')
                 {
                     valid = true;
-                    visCvarName = 'smm_showammo';
-                    thingtype = JGP_SafeMapMarker.SMM_AMMO;
+                    visCvarName = 'rmm_showammo';
+                    thingtype = JGP_SafeMapMarker.rmm_AMMO;
+                }
+
+                else if (item is 'Health')
+                {
+                    valid = true;
+                    visCvarName = 'rmm_showhealth';
+                    thingtype = JGP_SafeMapMarker.rmm_AMMO;
                 }
 
                 else if (item is 'PowerupGiver' || item.bBIGPOWERUP)
                 {
                     valid = true;
-                    visCvarName = 'smm_showartifacts';
-                    thingtype = JGP_SafeMapMarker.SMM_ARTIFACT;
+                    visCvarName = 'rmm_showartifacts';
+                    thingtype = JGP_SafeMapMarker.rmm_ARTIFACT;
                 }
 
                 else
                 {
                     valid = true;
-                    visCvarName = 'smm_showotheritems';
-                    thingtype = JGP_SafeMapMarker.SMM_OTHERITEMS;
+                    visCvarName = 'rmm_showotheritems';
+                    thingtype = JGP_SafeMapMarker.rmm_OTHERITEMS;
                 }
             }
 
@@ -93,12 +100,12 @@ class JGP_SafeMapMarker : MapMarker
 
     enum ItemTypes
     {
-        SMM_MONSTER,
-        SMM_KEY,
-        SMM_WEAPON,
-        SMM_AMMO,
-        SMM_ARTIFACT,
-        SMM_OTHERITEMS,
+        rmm_MONSTER,
+        rmm_KEY,
+        rmm_WEAPON,
+        rmm_AMMO,
+        rmm_ARTIFACT,
+        rmm_OTHERITEMS,
     }
 
 	state GetFinalDeathState()
@@ -133,21 +140,21 @@ class JGP_SafeMapMarker : MapMarker
         if (!ssprite)
             return null;
 
-        JGP_SafeMapMarker smm = JGP_SafeMapMarker(Actor.Spawn("JGP_SafeMapMarker"));
-        if (smm)
+        JGP_SafeMapMarker rmm = JGP_SafeMapMarker(Actor.Spawn("JGP_SafeMapMarker"));
+        if (rmm)
         {
-            smm.attachToSprite = ssprite;
-            smm.sprite = ssprite;
-            smm.frame = sstate.frame;
-            smm.scale = attachTo.scale * 0.25;
-            smm.attachTo = attachTo;
-            smm.thingtype = thingtype;
-            smm.visCvarName = visCvarName;
+            rmm.attachToSprite = ssprite;
+            rmm.sprite = ssprite;
+            rmm.frame = sstate.frame;
+            rmm.scale = attachTo.scale * 0.25;
+            rmm.attachTo = attachTo;
+            rmm.thingtype = thingtype;
+            rmm.visCvarName = visCvarName;
             if (attachTo is 'Inventory')
-                smm.invAttachTo = Inventory(attachTo);
+                rmm.invAttachTo = Inventory(attachTo);
         }
 
-        return smm;
+        return rmm;
     }
 
     void ShowHide()
@@ -185,7 +192,7 @@ class JGP_SafeMapMarker : MapMarker
         ShowHide();
 
         if (!scaleCvar)
-            scaleCvar = CVar.GetCVar('smm_markerscale', players[consoleplayer]);
+            scaleCvar = CVar.GetCVar('rmm_markerscale', players[consoleplayer]);
         
         scale = attachTo.scale * scaleCvar.GetFloat();
         
