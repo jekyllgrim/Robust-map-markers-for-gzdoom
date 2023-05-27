@@ -1,0 +1,24 @@
+AddOptionMenu "OptionsMenu" before "CustomizeControls" 
+{
+	Submenu "Robust map markers settings", "SMM_Settings"
+}
+
+AddOptionMenu "OptionsMenuSimple" before "CustomizeControls" 
+{
+	Submenu "Robust map markers settings", "SMM_Settings"
+	StaticText ""
+}
+
+OptionMenu "SMM_Settings"
+{
+	Title "Robust map markers Settings"
+
+	Option "Monster markers", "smm_showmonsters", "OnOff"
+	Option "Key markers", "smm_showkeys", "OnOff"
+	Option "Weapon markers", "smm_showweapons", "OnOff"
+	Option "Ammo markers", "smm_showammo", "OnOff"
+	Option "Powerup markers", "smm_showartifacts", "OnOff"
+	Option "Other item markers", "smm_showotheritems", "OnOff"
+	Option "Show items dropped by enemies", "smm_showdropped", "OnOff"
+	Slider "Marker scale", "smm_markerscale", 0.05, 5.0, 0.05, 2
+}
