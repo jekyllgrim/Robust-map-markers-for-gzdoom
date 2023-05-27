@@ -1,4 +1,5 @@
 user bool rmm_showmonsters = false;
+user bool rmm_showcorpses = false;
 user bool rmm_showkeys = true;
 user bool rmm_showweapons = true;
 user bool rmm_showammo = false;

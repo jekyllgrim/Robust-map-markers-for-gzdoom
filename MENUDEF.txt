@@ -14,6 +14,7 @@ OptionMenu "rmm_Settings"
 	Title "Robust map markers Settings"
 
 	Option "Monster markers", "rmm_showmonsters", "OnOff"
+	Option "Dead monster markers", "rmm_showcorpses", "OnOff", "rmm_showmonsters"
 	Option "Key markers", "rmm_showkeys", "OnOff"
 	Option "Weapon markers", "rmm_showweapons", "OnOff"
 	Option "Ammo markers", "rmm_showammo", "OnOff"

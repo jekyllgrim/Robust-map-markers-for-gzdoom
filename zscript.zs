@@ -87,6 +87,7 @@ class JGP_SafeMapMarker : MapMarker
     int thingtype;
     transient CVar scaleCvar;
     transient CVar visCvar;
+    transient CVar deadCvar;
     name visCvarName;
 
 	Default 
@@ -159,22 +160,29 @@ class JGP_SafeMapMarker : MapMarker
 
     void ShowHide()
     {
-        bool vis = true;
-        if (!visCvar && visCvarName != 'none') {
+        bool shouldBeVisible = true;
+
+        if (!visCvar && visCvarName != 'none')
+        {
             visCvar = CVar.GetCVar(visCvarName, players[consoleplayer]);
         }
 
-        if (visCvar)            
-            vis = visCvar.GetBool();
+        if (!deadCvar)
+        {
+            deadCvar = CVar.GetCVar('rmm_showcorpses', players[consoleplayer]);
+        }
 
-        if (!hidden && (!vis || attachTo.bNOSECTOR))
+        shouldBeVisible = !attachTo.bNOSECTOR && (visCvar && visCvar.GetBool());        
+        if (thingtype == RMM_MONSTER)
+            shouldBeVisible = shouldBeVisible && (!attachTo.bKILLED || (deadCvar && deadCvar.GetBool()));
+
+        if (!hidden && !shouldBeVisible)
         {
             hidden = true;
             sprite = GetSpriteIndex("TNT1");
-            return;
         }
 
-        if (hidden && !attachTo.bNOSECTOR && vis)
+        else if (hidden && shouldBeVisible)
         {
             hidden = false;
             sprite = attachToSprite;
@@ -210,8 +218,21 @@ class JGP_SafeMapMarker : MapMarker
                 Destroy();
                 return;
             }
-            sprite = deathstate.sprite;
+            attachToSprite = deathstate.sprite;
             frame = deathstate.frame;
+        }
+
+        if (bKILLED && !attachTo.bKILLED)
+        {
+            bKILLED = false;
+            state sspawnstate = attachTo.Spawnstate;
+            if (!sspawnstate || !sspawnstate.sprite)
+            {
+                Destroy();
+                return;
+            }
+            attachToSprite = sspawnstate.sprite;
+            frame = sspawnstate.frame;
         }
 	}
 }
