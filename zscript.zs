@@ -12,6 +12,8 @@ class JGP_SafeMapMarkerHandler : EventHandler
             int thingtype;
             name visCvarName;
             Inventory item = Inventory(e.thing);
+			if (item && item.owner)
+				return;
 
             if (!showdropped)
                 showdropped = CVar.GetCVar('rmm_showdropped', players[consoleplayer]);
@@ -138,9 +140,30 @@ class JGP_SafeMapMarker : MapMarker
             return null;
         
         let ssprite = sstate.sprite;
-        if (!ssprite)
-            return null;
-
+		string spritename = TexMan.GetName(sstate.GetSpriteTexture(0));
+		spritename = spritename.Left(4);
+		//console.printf("%s spritename: %s - %s", attachTo.GetTag(), spritename, (spritename ~== "TNT1") ? "\c[Red]INVALID" : "\c[Green]VALID");
+        if (!ssprite || spritename ~== "TNT1")
+		{
+			while (sstate && sstate.nextstate)
+			{
+				sstate = sstate.nextstate;
+				spritename = TexMan.GetName(sstate.GetSpriteTexture(0));
+				spritename = spritename.Left(4);
+				if (!(spritename ~== "TNT1"))
+				{
+					ssprite = sstate.sprite;
+					break;
+				}
+			}
+		}
+		//console.printf("%s spritename: %s - %s", attachTo.GetTag(), spritename, (spritename ~== "TNT1") ? "\c[Red]INVALID" : "\c[Green]VALID");
+		
+		if (!ssprite || spritename ~== "TNT1")
+		{
+			return null;
+		}
+		
         JGP_SafeMapMarker rmm = JGP_SafeMapMarker(Actor.Spawn("JGP_SafeMapMarker"));
         if (rmm)
         {
@@ -234,5 +257,16 @@ class JGP_SafeMapMarker : MapMarker
             attachToSprite = sspawnstate.sprite;
             frame = sspawnstate.frame;
         }
+	}
+}
+
+class TestKey : Key
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		BAL1 A -1;
+		stop;
 	}
 }
