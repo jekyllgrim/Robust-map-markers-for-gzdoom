@@ -259,14 +259,3 @@ class JGP_SafeMapMarker : MapMarker
         }
 	}
 }
-
-class TestKey : Key
-{
-	States
-	{
-	Spawn:
-		TNT1 A 0;
-		BAL1 A -1;
-		stop;
-	}
-}
