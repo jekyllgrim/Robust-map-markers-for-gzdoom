@@ -25,7 +25,7 @@ class JGP_SafeMapMarkerHandler : EventHandler
 
             if (item && (!item.bTOSSED || showdropped.GetBool()))
             {
-                if (item is 'Key')
+                if (item is 'Key' || item is 'PB_Key')
                 {
                     valid = true;
                     visCvarName = 'rmm_showkeys';
